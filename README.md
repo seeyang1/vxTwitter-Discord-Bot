@@ -8,10 +8,10 @@ A side project utilizing discord.py API and the TwitFix repository
   | Have the bot say who posted the twitter link (prefereably without a ping)~~
 3) make the bot check to see if there's an embed or video at all within the tweet (there's no need to fix embeds if there's no image/video)
   | might make it check only for videos as the main use for fxtwitter is for videos
+4) Make it so that if someone replies to a message with a twitter link with video and pings the bot it'll embed twitter link
 
 
  Things to consider:
  1) Maybe make a flag (ex: make it ![twitter link] symbol not specific)
  2) if twitfix "failed to scan link " -> display an error message
- 3) Maybe make it so that if someone replies to a message and pings the bot it'll embed twitter link
 

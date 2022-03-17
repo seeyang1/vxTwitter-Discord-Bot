@@ -20,7 +20,7 @@ async def on_message(message):
         newLink = message.content.replace("twitter","fxtwitter") #appending fx into the link 
         await message.channel.send(newLink) #sending the link to the the user
 
-client.run('')
+client.run('TOKEN HERE')
 
 
 

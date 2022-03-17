@@ -6,6 +6,8 @@ import re #going to use regex to find twitter link
 
 client = discord.Client()
 
+
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client)) #console output to confirm login
@@ -14,20 +16,32 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user: #checking to see if the message is sent by the bot itself
         return
-    #await message.channel.send(message.content) #debug to see what the bot is seeing
-    x = re.search("https://twitter.com",message.content)
-    if x == None:
-        return
-    else:
-        channel = message.channel
-        newLink = message.content.replace("twitter","fxtwitter") #appending fx into the link 
-        await message.channel.send(newLink) #sending the link to the the user
 
-    #if message.content('https://twitter.com/'): #have to find a way to 
+#-----------------needed variables---------------------------------------
+    tweetFlag=False #if flag is false, usr didn't send a twitter link
+    newLink=""
+    usrMsg=""
+#------------------------------------------------------------------------
 
-        #channel = message.channel
-        #newLink = message.content.replace("twitter","fxtwitter") #appending fx into the link 
-        #await message.channel.send(newLink) #sending the link to the the user
+#Check for video embed here:
 
-client.run('TOKEN HERE')
+#this message parsing:
+    x = re.split("\s",message.content)
+    for words in x: #to go through the message that was sent 
+        if "fxtwitter" in words: #this means the fix has already been applied so no need to do anything
+            return
+        if "twitter" in words:
+            tweetFlag=True
+            newLink = words.replace("twitter","fxtwitter")
+            #usrMsg=usrMsg+"[Twitter link] "
+        else:
+            usrMsg=usrMsg+words+" "
+    if tweetFlag:
+        await message.delete()
+        await message.channel.send(message.author.mention+": "+usrMsg+newLink)
+        #delete message from the usr who sent twitter link 
+        #message format:
+        #@{usr} said [usrMsg] \n newLink
 
+
+client.run('Token')

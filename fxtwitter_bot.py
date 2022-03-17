@@ -14,8 +14,8 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user: #checking to see if the message is sent by the bot itself
         return
-
-    x = re.search("Https://twitter.com",message.content)
+    #await message.channel.send(message.content) #debug to see what the bot is seeing
+    x = re.search("https://twitter.com",message.content)
     if x == None:
         return
     else:

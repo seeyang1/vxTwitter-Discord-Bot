@@ -9,7 +9,7 @@ A side project utilizing discord.py API and the TwitFix repository
 
 
  Things to consider:
- Maybe make a flag (ex: make it ![twitter link] symbol not specific)
- if twitfix "failed to scan link " -> display an error message
- Maybe make it so that if someone replies to a message and pings the bot it'll embed twitter link
+ 1) Maybe make a flag (ex: make it ![twitter link] symbol not specific)
+ 2) if twitfix "failed to scan link " -> display an error message
+ 3) Maybe make it so that if someone replies to a message and pings the bot it'll embed twitter link
 

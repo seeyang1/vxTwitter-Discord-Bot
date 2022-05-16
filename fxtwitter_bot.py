@@ -32,7 +32,7 @@ async def on_message(message):
             return
         if "twitter" in words:
             tweetFlag=True
-            newLink = words.replace("twitter","fxtwitter")
+            newLink = words.replace("twitter","vxtwitter")
             #usrMsg=usrMsg+"[Twitter link] "
         else:
             usrMsg=usrMsg+words+" "

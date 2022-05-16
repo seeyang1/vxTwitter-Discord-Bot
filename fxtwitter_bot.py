@@ -30,7 +30,7 @@ async def on_message(message):
     for words in x: #to go through the message that was sent 
         if "fxtwitter" in words: #this means the fix has already been applied so no need to do anything
             return
-        if "twitter" in words:
+        if "twitter.com" in words:
             tweetFlag=True
             newLink = words.replace("twitter","vxtwitter")
             #usrMsg=usrMsg+"[Twitter link] "

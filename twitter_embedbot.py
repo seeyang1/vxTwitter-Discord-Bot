@@ -29,7 +29,7 @@ async def on_message(message):
         embedArr=message.embeds #to detect multiple embeds  
         linkArr=[] #for when multiEmbedFlg is true
 #------------------------------------------------------------------------
-        print(embedArr)
+
 #message parsing:
         x = re.split("\s",message.content)
         for words in x: # finding if a twitter link is sent, should technically be faster if there's no twitter link
@@ -47,8 +47,8 @@ async def on_message(message):
                             linkArr.append(i.image.url)
                         linkArr[0]=newLink # to make the first link that's sent the vxtwitter link
                 else:
-                    usrMsg=usrMsg+words+" "
-            await message.delete()
+                    usrMsg=usrMsg+words+" " # here just in case somebody sends text alongside the twitter link
+            await message.delete() # work flow: delete original message -> send the fixed media message(s)
             if multiEmbedFlg:
                 await message.channel.send(message.author.display_name+": "+usrMsg+linkArr[0])
                 for i in range(1,len(embedArr)):
@@ -57,9 +57,9 @@ async def on_message(message):
                 print(linkArr)
             else:
                 await message.channel.send(message.author.display_name+": "+usrMsg+'\n'+newLink)
-                #delete message from the usr who sent twitter link 
-                #message format:
-                #{usr} said [usrMsg] \n newLink
+                #message format: 
+                #{usr}: [usrMsg] newLink
+                # [Other pictures if applicable] 
         else:
                 return
 

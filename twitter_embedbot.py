@@ -5,11 +5,18 @@ from asyncio.windows_events import NULL
 from audioop import mul
 from queue import Empty
 import discord
-import re #going to use regex to find twitter link
+import re 
+
 
 client = discord.Client()
 
-
+def twitterCheck(msgArr): #function that takes an array and returns true and false depending on if it contains a twitter link
+    #message parsing:           
+    for words in msgArr: # finding if a twitter link is sent, should technically be faster if there's no twitter link
+        if "twitter.com" in words:
+            return True
+        else:
+            return False
 
 @client.event
 async def on_ready():
@@ -17,25 +24,19 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    #-----------------needed variables---------------------------------------
+    multiEmbedFlg = False #if flag is false, the link only has 1 image/embed
+    newLink=""
+    usrMsg=""
+    embedArr = message.embeds #to detect multiple embeds  
+    linkArr=[] #for when multiEmbedFlg is true
+    #------------------------------------------------------------------------    
     if message.author == client.user: #checking to see if the message is sent by the bot itself
         return
     else:
-
-#-----------------needed variables---------------------------------------
-        tweetFlag=False #if flag is false, usr didn't send a twitter link
-        multiEmbedFlg=False #if flag is false, the link only has 1 image/embed
-        newLink=""
-        usrMsg=""
-        embedArr=message.embeds #to detect multiple embeds  
-        linkArr=[] #for when multiEmbedFlg is true
-#------------------------------------------------------------------------
-
-#message parsing:
         x = re.split("\s",message.content)
-        for words in x: # finding if a twitter link is sent, should technically be faster if there's no twitter link
-            if "twitter.com" in words:
-                tweetFlag = True
-        if tweetFlag:
+        if twitterCheck(x):
+            print(message.embeds)
             for words in x: #to go through the message that was sent 
                 if "vxtwitter" in words: #this means the fix has already been applied so no need to do anything
                     return
@@ -54,14 +55,14 @@ async def on_message(message):
                 for i in range(1,len(embedArr)):
                     progIndicator = str(i+1)+"/"+str(len(embedArr))
                     await message.channel.send(progIndicator+'\n'+linkArr[i])
-                print(linkArr)
+                return
             else:
                 await message.channel.send(message.author.display_name+": "+usrMsg+'\n'+newLink)
                 #message format: 
                 #{usr}: [usrMsg] newLink
-                # [Other pictures if applicable] 
+                # [Other pictures if applicable]
+                return 
         else:
-                return
+            return
 
 client.run('token')
-

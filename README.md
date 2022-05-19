@@ -9,4 +9,4 @@ A side project utilizing discord.py API and the TwitFix repository
 
 Current bugs:
  1) for multi pictured tweets, the bot will sometimes not post the subsequent photos. But if you post the same tweet again, it will do as intended and send the vxtwitter link and the subsequent photots.
-    - it might have to do with how I'm using the API or how discord works with their embeds.
+    - it might have to do with how I'm using the API or how discord works with their embeds. (If you have any idea please reach out to me via discord @ seeyang1#0010)

@@ -11,4 +11,5 @@ Current bugs:
  1) for multi pictured tweets, the bot will sometimes not post the subsequent photos. But if you post the same tweet again, it will do as intended and send the vxtwitter link and the subsequent photots.
     - it might have to do with how I'm using the API or how discord works with their embeds. (If you have any idea please reach out to me via discord @ seeyang1#0010)
     - Turns out that the main vx branch has a fix of sorts for this so I've implemented that
- 2) bot kinda breaks after the first message, have to look into fixing that
+ 2) need to find a better way to detect what type of embed it is (video vs image)
+    - right now, generally the first time you send a unique tweet, the way the detection works right now it doesn't fill the dictionary.

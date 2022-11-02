@@ -6,8 +6,12 @@ from logging.config import valid_ident
 import discord
 import re 
 
+intents = discord.Intents.default()
+intents.messages=True
+intents.message_content=True
 
-client = discord.Client()
+client = discord.Client(intents=intents)
+
 
 def twitterCheck(msgArr): #function that takes an array and returns true and false depending on if it contains a twitter link
     #message parsing:           
@@ -23,22 +27,21 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    #-----------------needed variables---------------------------------------
-    newLink=""
-    usrMsg=""
-    newDict={}
-    vidFlag=False
-    imgFlag=False
-    #------------------------------------------------------------------------    
     if message.author == client.user: #checking to see if the message is sent by the bot itself
         return
     else:
         x = re.split("\s",message.content)
+        #print(x)
         if twitterCheck(x):
             for words in x: #to go through the message that was sent 
                 if "vxtwitter" in words: #this means the fix has already been applied so no need to do anything
                     return
                 if "twitter.com" in words: #found twitter link
+                    newLink=""
+                    usrMsg=""
+                    newDict={}
+                    vidFlag=False
+                    imgFlag=False
                     embeds = message.embeds
                     for embed in embeds:
                         newDict=embed.to_dict()
@@ -63,4 +66,4 @@ async def on_message(message):
         else:
             return
 
-client.run('Token')
+client.run('TOKEN')
